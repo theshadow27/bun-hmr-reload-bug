@@ -1,5 +1,7 @@
 # Bun Bug: `server.reload()` with HMR breaks bundler on second request
 
+**Tracking issue:** https://github.com/oven-sh/bun/issues/26075
+
 ## Summary
 
 When using `server.reload()` to enable HMR after an initial `Bun.serve()` in a monorepo with workspace links, the **second page load fails** with file reading errors. Using `Bun.serve()` directly with HMR works fine.
@@ -49,6 +51,9 @@ The bug occurs when ALL of these conditions are met:
 |---------|--------|
 | `Bun.serve({ development: { hmr: true } })` | ✅ Works |
 | `Bun.serve({...})` then `server.reload({ development: { hmr: true } })` | ❌ Fails |
+| `server.reload()` with HMR but **no workspace imports** | ✅ Works |
+
+The bug specifically requires workspace-linked packages to be imported by the client bundle.
 
 ## Use Case
 
