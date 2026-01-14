@@ -1,0 +1,10 @@
+{
+  "name": "bun-hmr-bug-repro",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "bun run --watch packages/app/server.ts",
+    "dev:hot": "bun run --hot packages/app/server.ts",
+    "dev:plain": "bun run packages/app/server.ts"
+  }
+}
